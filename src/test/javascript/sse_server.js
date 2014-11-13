@@ -6,25 +6,25 @@ var fs = require("fs");
   }
 
 http.createServer(function (req, res) {
-  var fileName;
   var interval;
-
-  fileName = "." + req.url;
+  var fileName = "." + req.url;
 
   if (fileName === "./app/stocks/prices") {
+    var origin = (req.headers.origin || "*");
     var i = 0;
     var price = Math.floor(Math.random() * (100 - 1) + 1);
-    res.writeHead(200, {"Content-Type":"text/event-stream", "Cache-Control":"no-cache", "Connection":"keep-alive"});
-    res.write("retry: 10000\n");
+    res.writeHead(200, {"Content-Type":"text/event-stream", "Cache-Control":"no-cache", "Connection":"keep-alive", "access-control-allow-origin": "*"});
+    
     res.write("event: snapshot\n");
-    res.write("id: c9db1c53-bcb4-4b0b-ae30-ac91254ae44" + i);
+    res.write("id: c9db1c53-bcb4-4b0b-ae30-ac91254ae44" + i + "\n");
     res.write("data: [{\"title\":\"Value 1\",\"price\":" + price + ",\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 2\",\"price\":89,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 3\",\"price\":63,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 4\",\"price\":11,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 5\",\"price\":30,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 6\",\"price\":20,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 7\",\"price\":65,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 8\",\"price\":97,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 9\",\"price\":4,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 10\",\"price\":43,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 11\",\"price\":7,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 12\",\"price\":27,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 13\",\"price\":51,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 14\",\"price\":38,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"},{\"title\":\"Value 15\",\"price\":16,\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"}]\n\n");
+    res.write("retry: 10000\n");
 
     interval = setInterval(function() {
       i = i + 1;
       price = Math.floor(Math.random() * (100 - 1) + 1);
       res.write("event: snapshot\n");
-      res.write("id: c9db1c53-bcb4-4b0b-ae30-ac91254ae44" + i);
+      res.write("id: c9db1c53-bcb4-4b0b-ae30-ac91254ae44" + i + "\n");
       res.write("data: [{\"title\":\"Value 1\",\"price\":" + price + ",\"param1\":\"value1\",\"param2\":\"value2\",\"param3\":\"value3\",\"param4\":\"value4\",\"param5\":\"value5\",\"param6\":\"value6\",\"param7\":\"value7\",\"param8\":\"value8\"}]\n\n");
     }, 1000);
     req.connection.addListener("close", function () {
