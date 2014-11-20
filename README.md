@@ -25,6 +25,6 @@ cd ./src/test/javascript
 node sse_server.js
 ```
 
-Run one of the simulations under `src/test/scala/org.tests.gatling.sse`
+Run one of the simulations under `src/test/scala/org.tests.gatling.sse` with your favorite IDE or via `mvn gatling:execute`
 
 Note that setting in the gatling.conf the request timeout of the ahc client to -1 is required.
