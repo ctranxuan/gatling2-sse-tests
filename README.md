@@ -18,6 +18,7 @@ sbt aether-install
 
 ``` 
 git clone https://github.com/ctranxuan/gatling2-sse-tests.git
+git checkout -b sse-feature
 cd gatling2-sse-tests
 mvn clean install
 cd ./src/test/javascript
