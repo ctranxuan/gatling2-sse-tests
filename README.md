@@ -2,7 +2,7 @@
 
 This project is a sample project to test the SSE (Server Sent Event) feature of the [open-source stress tool Gatling2](http://gatling.io/).
 This project depends on the implementation of the SSE feature ([https://github.com/gatling/gatling/issues/1734]()) which is not
-yet integrated into the master branch of Gatling2 (as of 2014/11/12) but can be found on [https://github.com/ctranxuan/gatling.git]()
+yet integrated into the master branch of Gatling2 (as of 2014/11/12) but can be found on [https://github.com/ctranxuan/gatling]()
 
 ## Steps
 
