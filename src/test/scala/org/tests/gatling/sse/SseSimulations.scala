@@ -46,7 +46,7 @@ class SseWithRegexCheckSimulation extends Simulation {
 
   val scn = scenario(this.getClass.getSimpleName)
             .exec(sse("sse").get("/stocks/prices")
-            .check(wsAwait.within(10).until(1).regex("""event: snapshot(.*)""")))
+            .check(wsAwait.within(10).until(1).regex(""""event":"snapshot(.*)"""")))
             .pause(15)
             .exec(sse("close").close())
 
@@ -63,7 +63,7 @@ class SseWithFailedRegexCheckSimulation extends Simulation {
 
   val scn = scenario(this.getClass.getSimpleName)
             .exec(sse("sse").get("/stocks/prices")
-              .check(wsAwait.within(10).until(1).regex("""event1: snapshot(.*)""")))
+              .check(wsAwait.within(10).until(1).regex(""""event1":"snapshot(.*)"""")))
             .pause(15)
             .exec(sse("close").close())
 
@@ -78,7 +78,7 @@ class SseWithWsListenRegexCheckSimulation extends Simulation {
 
   val scn = scenario(this.getClass.getSimpleName)
             .exec(sse("sse").get("/stocks/prices")
-                  .check(wsListen.within(10).until(1).regex("""event: snapshot(.*)"""))
+                  .check(wsListen.within(10).until(1).regex(""""event":"snapshot(.*)""""))
     )
             .pause(15)
             .exec(sse("close").close())
