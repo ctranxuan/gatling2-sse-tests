@@ -14,7 +14,7 @@ class SseSimulation extends Simulation {
     .header("Accept", "text/event-stream")
 
   val scn = scenario(this.getClass.getSimpleName)
-    .exec(sse("sse").get("/stocks/prices"))
+    .exec(sse("sse").open("/stocks/prices"))
     .pause(15)
     .exec(sse("close").close())
 
@@ -29,7 +29,7 @@ class SseWith1MeasureSimulation extends Simulation {
 
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
                   .check(wsAwait.within(10).until(1)))
             .pause(15)
             .exec(sse("close").close())
@@ -45,7 +45,7 @@ class SseWithRegexCheckSimulation extends Simulation {
                  .header("Accept", "text/event-stream")
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
             .check(wsAwait.within(10).until(1).regex(""""event":"snapshot(.*)"""")))
             .pause(15)
             .exec(sse("close").close())
@@ -62,7 +62,7 @@ class SseWithFailedRegexCheckSimulation extends Simulation {
   .doNotTrackHeader("1")
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
               .check(wsAwait.within(10).until(1).regex(""""event1":"snapshot(.*)"""")))
             .pause(15)
             .exec(sse("close").close())
@@ -77,7 +77,7 @@ class SseWithWsListenRegexCheckSimulation extends Simulation {
                  .header("Accept", "text/event-stream")
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
                   .check(wsListen.within(10).until(1).regex(""""event":"snapshot(.*)""""))
     )
             .pause(15)
@@ -94,7 +94,7 @@ class SseWithWsListenExpectCheckSimulation extends Simulation {
                  
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
                   .check(wsListen.within(30 seconds).expect(1))
     )
             .pause(15)
@@ -111,7 +111,7 @@ class SseWithWsAwaitExpectCheckSimulation extends Simulation {
                  .doNotTrackHeader("1")
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
                   .check(wsAwait.within(30 seconds).expect(1))
     )
             .pause(15)
@@ -128,7 +128,7 @@ class SseWithRampWsAwaitExpectCheckSimulation extends Simulation {
                  .doNotTrackHeader("1")
 
   val scn = scenario(this.getClass.getSimpleName)
-            .exec(sse("sse").get("/stocks/prices")
+            .exec(sse("sse").open("/stocks/prices")
                   .check(wsAwait.within(30 seconds).expect(1).message)
     )
             .pause(300)
